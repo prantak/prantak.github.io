@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Prantak Singh — Frontend Engineer</title>
+<meta name="description" content="Frontend Engineer specialising in React.js with 4+ years of experience building enterprise SaaS platforms for Fortune 500 clients."/>
+<meta name="keywords" content="Frontend Engineer, React.js, JavaScript, HTML, CSS, SCSS, AG Grid, Redux, UI Developer, Gurugram"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg: #080909;
+  --bg2: #0d0f0f;
+  --card: #111414;
+  --border: #1e2222;
+  --border2: #252a2a;
+  --gold: #c9a84c;
+  --gold2: #e8c97a;
+  --gold-dim: rgba(201,168,76,0.12);
+  --text: #e8e4dc;
+  --muted: #6b7170;
+  --dim: #2a2e2e;
+  --white: #f5f2ec;
+  --green: #4caf88;
+  --blue: #4c8fcf;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+html{scroll-behavior:smooth;font-size:16px;}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Outfit',sans-serif;
+  font-weight:300;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:1000;
+  opacity:.5;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:900;
+  padding:20px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:rgba(8,9,9,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;
+  font-weight:600;
+  color:var(--white);
+  letter-spacing:0.05em;
+  text-decoration:none;
+}
+.nav-logo span{color:var(--gold);}
+
+.nav-links{
+  display:flex;
+  gap:36px;
+  list-style:none;
+}
+
+.nav-links a{
+  font-family:'DM Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  transition:color .25s;
+}
+.nav-links a:hover{color:var(--gold);}
+
+.nav-cta{
+  font-family:'DM Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--gold);
+  border:1px solid var(--gold);
+  padding:8px 20px;
+  text-decoration:none;
+  transition:all .25s;
+}
+.nav-cta:hover{background:var(--gold);color:var(--bg);}
+
+/* ── HERO ── */
+#home{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:120px 60px 80px;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-grid-bg{
+  position:absolute;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+.hero-glow{
+  position:absolute;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+  top:-100px;right:-100px;
+  pointer-events:none;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+  max-width:800px;
+}
+
+.hero-tag{
+  font-family:'DM Mono',monospace;
+  font-size:0.72rem;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:24px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.hero-tag::before{
+  content:'';
+  width:40px;height:1px;
+  background:var(--gold);
+}
+
+.hero-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3.5rem, 8vw, 7rem);
+  font-weight:300;
+  line-height:1.0;
+  color:var(--white);
+  letter-spacing:-0.02em;
+  margin-bottom:8px;
+}
+.hero-name em{
+  font-style:italic;
+  color:var(--gold);
+}
+
+.hero-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.2rem, 3vw, 2rem);
+  font-weight:300;
+  color:var(--muted);
+  letter-spacing:0.05em;
+  margin-bottom:32px;
+}
+
+.hero-desc{
+  font-size:1rem;
+  color:var(--text);
+  opacity:0.7;
+  max-width:560px;
+  line-height:1.8;
+  margin-bottom:48px;
+}
+
+.hero-stats{
+  display:flex;
+  gap:48px;
+  margin-bottom:52px;
+  flex-wrap:wrap;
+}
+
+.stat{border-left:2px solid var(--gold);padding-left:16px;}
+.stat-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;
+  font-weight:600;
+  color:var(--gold);
+  line-height:1;
+  display:block;
+}
+.stat-label{
+  font-family:'DM Mono',monospace;
+  font-size:0.68rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;}
+
+.btn-primary{
+  font-family:'DM Mono',monospace;
+  font-size:0.75rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  background:var(--gold);
+  color:var(--bg);
+  padding:14px 32px;
+  text-decoration:none;
+  font-weight:500;
+  transition:all .25s;
+  border:1px solid var(--gold);
+}
+.btn-primary:hover{background:transparent;color:var(--gold);}
+
+.btn-secondary{
+  font-family:'DM Mono',monospace;
+  font-size:0.75rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  background:transparent;
+  color:var(--text);
+  padding:14px 32px;
+  text-decoration:none;
+  border:1px solid var(--border2);
+  transition:all .25s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── SECTIONS ── */
+section{padding:100px 60px;}
+
+.section-label{
+  font-family:'DM Mono',monospace;
+  font-size:0.68rem;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:12px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.section-label::before{content:'';width:30px;height:1px;background:var(--gold);}
+
+.section-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2rem,4vw,3.2rem);
+  font-weight:300;
+  color:var(--white);
+  line-height:1.1;
+  margin-bottom:60px;
+}
+
+/* ── ABOUT ── */
+#about{background:var(--bg2);}
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:80px;
+  align-items:start;
+}
+
+.about-text p{
+  font-size:1rem;
+  color:var(--text);
+  opacity:0.75;
+  margin-bottom:20px;
+  line-height:1.85;
+}
+
+.about-text p strong{color:var(--gold);font-weight:500;}
+
+.about-highlights{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+
+.highlight-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:24px 28px;
+  position:relative;
+  overflow:hidden;
+  transition:border-color .3s;
+}
+.highlight-card::before{
+  content:'';
+  position:absolute;
+  left:0;top:0;bottom:0;
+  width:3px;
+  background:var(--gold);
+}
+.highlight-card:hover{border-color:var(--gold);}
+
+.highlight-card h4{
+  font-family:'DM Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:8px;
+}
+
+.highlight-card p{
+  font-size:0.9rem;
+  color:var(--text);
+  opacity:0.7;
+  line-height:1.6;
+}
+
+/* ── EXPERIENCE ── */
+#experience{background:var(--bg);}
+
+.exp-timeline{
+  position:relative;
+  padding-left:2px;
+}
+
+.exp-item{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:0 60px;
+  margin-bottom:60px;
+  position:relative;
+}
+
+.exp-item::before{
+  content:'';
+  position:absolute;
+  left:200px;
+  top:0;bottom:-60px;
+  width:1px;
+  background:var(--border);
+}
+.exp-item:last-child::before{display:none;}
+
+.exp-left{padding-top:4px;}
+
+.exp-dates{
+  font-family:'DM Mono',monospace;
+  font-size:0.72rem;
+  color:var(--gold);
+  letter-spacing:0.05em;
+  margin-bottom:6px;
+}
+
+.exp-company-name{
+  font-size:0.85rem;
+  color:var(--muted);
+  font-weight:400;
+}
+
+.exp-right{
+  padding-left:60px;
+  border-left:1px solid var(--border);
+  position:relative;
+}
+
+.exp-right::before{
+  content:'';
+  position:absolute;
+  left:-5px;top:8px;
+  width:9px;height:9px;
+  border-radius:50%;
+  background:var(--gold);
+  border:2px solid var(--bg);
+}
+
+.exp-role-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.5rem;
+  font-weight:600;
+  color:var(--white);
+  margin-bottom:4px;
+}
+
+.exp-company-tag{
+  font-family:'DM Mono',monospace;
+  font-size:0.7rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:20px;
+  display:inline-block;
+  background:var(--gold-dim);
+  padding:3px 10px;
+}
+
+.exp-bullets{
+  list-style:none;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.exp-bullets li{
+  font-size:0.9rem;
+  color:var(--text);
+  opacity:0.72;
+  padding-left:20px;
+  position:relative;
+  line-height:1.65;
+}
+.exp-bullets li::before{
+  content:'▸';
+  position:absolute;left:0;
+  color:var(--gold);
+  font-size:0.75rem;
+  top:2px;
+}
+
+/* ── PROJECTS ── */
+#projects{background:var(--bg2);}
+
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(340px,1fr));
+  gap:24px;
+}
+
+.project-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:36px;
+  position:relative;
+  overflow:hidden;
+  transition:all .3s;
+  cursor:default;
+}
+
+.project-card::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  transform:scaleX(0);
+  transform-origin:left;
+  transition:transform .4s;
+}
+.project-card:hover{border-color:var(--border2);transform:translateY(-4px);}
+.project-card:hover::after{transform:scaleX(1);}
+
+.project-tag{
+  font-family:'DM Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:16px;
+  opacity:0.8;
+}
+
+.project-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.4rem;
+  font-weight:600;
+  color:var(--white);
+  margin-bottom:12px;
+  line-height:1.2;
+}
+
+.project-desc{
+  font-size:0.875rem;
+  color:var(--text);
+  opacity:0.65;
+  line-height:1.7;
+  margin-bottom:20px;
+}
+
+.project-tech{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+.tech-pill{
+  font-family:'DM Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.08em;
+  color:var(--muted);
+  background:var(--dim);
+  padding:4px 10px;
+  border:1px solid var(--border);
+}
+
+.project-status{
+  position:absolute;
+  top:20px;right:20px;
+  font-family:'DM Mono',monospace;
+  font-size:0.6rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:3px 8px;
+}
+.status-live{color:var(--green);border:1px solid var(--green);background:rgba(76,175,136,0.08);}
+.status-progress{color:var(--gold);border:1px solid var(--gold);background:var(--gold-dim);}
+
+/* ── SKILLS ── */
+#skills{background:var(--bg);}
+
+.skills-layout{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:20px;
+}
+
+.skill-group{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:28px;
+  transition:border-color .3s;
+}
+.skill-group:hover{border-color:var(--border2);}
+
+.skill-group-label{
+  font-family:'DM Mono',monospace;
+  font-size:0.68rem;
+  letter-spacing:0.15em;
+  text-transform:uppercase;
+  color:var(--gold);
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.skill-tags{display:flex;flex-wrap:wrap;gap:8px;}
+
+.skill-tag{
+  font-size:0.8rem;
+  color:var(--text);
+  opacity:0.75;
+  background:var(--dim);
+  padding:5px 12px;
+  border:1px solid var(--border);
+  transition:all .2s;
+}
+.skill-tag:hover{border-color:var(--gold);color:var(--gold);opacity:1;}
+
+/* ── CONTACT ── */
+#contact{
+  background:var(--bg2);
+  text-align:center;
+}
+
+.contact-inner{max-width:600px;margin:0 auto;}
+
+.contact-inner .section-label{justify-content:center;}
+.contact-inner .section-label::before{display:none;}
+
+.contact-desc{
+  font-size:1rem;
+  color:var(--text);
+  opacity:0.65;
+  margin-bottom:48px;
+  line-height:1.8;
+}
+
+.contact-links{
+  display:flex;
+  justify-content:center;
+  gap:32px;
+  flex-wrap:wrap;
+  margin-bottom:48px;
+}
+
+.contact-link{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:8px;
+  text-decoration:none;
+  transition:all .25s;
+}
+
+.contact-link-icon{
+  width:48px;height:48px;
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;justify-content:center;
+  font-size:1.2rem;
+  transition:all .25s;
+}
+.contact-link:hover .contact-link-icon{border-color:var(--gold);background:var(--gold-dim);}
+
+.contact-link-label{
+  font-family:'DM Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* ── FOOTER ── */
+footer{
+  padding:32px 60px;
+  border-top:1px solid var(--border);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:16px;
+}
+
+.footer-name{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1rem;
+  color:var(--muted);
+}
+.footer-name span{color:var(--gold);}
+
+.footer-note{
+  font-family:'DM Mono',monospace;
+  font-size:0.65rem;
+  letter-spacing:0.1em;
+  color:var(--muted);
+}
+
+/* ── SCROLL ANIMATIONS ── */
+.fade-up{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .nav-links{display:none;}
+  section{padding:70px 24px;}
+  #home{padding:100px 24px 70px;}
+  .about-grid{grid-template-columns:1fr;gap:48px;}
+  .exp-item{grid-template-columns:1fr;gap:8px;}
+  .exp-item::before{display:none;}
+  .exp-right{padding-left:20px;border-left:2px solid var(--border);}
+  .exp-left{padding-top:0;}
+  footer{padding:24px;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">P<span>.</span>Singh</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="mailto:prantaksingh.jss@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Frontend Engineer — React.js Specialist</div>
+    <h1 class="hero-name">Prantak<br/><em>Singh</em></h1>
+    <p class="hero-title">Building Enterprise UIs that Scale</p>
+    <p class="hero-desc">
+      Frontend Engineer with 4+ years of experience building high-performance web interfaces
+      for enterprise SaaS platforms trusted by Fortune 500 clients including Microsoft, IKEA, and Capgemini.
+      Based in Gurugram, Delhi NCR.
+    </p>
+    <div class="hero-stats">
+      <div class="stat">
+        <span class="stat-num">4+</span>
+        <span class="stat-label">Years Experience</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">10K+</span>
+        <span class="stat-label">Enterprise Users</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">91</span>
+        <span class="stat-label">Lighthouse Score</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num">F500</span>
+        <span class="stat-label">Clients Served</span>
+      </div>
+    </div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work</a>
+      <a href="#contact" class="btn-secondary">Get In Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">About Me</div>
+  <h2 class="section-title">The Developer Behind the Code</h2>
+  <div class="about-grid">
+    <div class="about-text fade-up">
+      <p>
+        I'm a Frontend Engineer based in Gurugram, specialising in <strong>React.js, JavaScript, HTML5, CSS3, and SCSS.</strong>
+        I build the kind of interfaces that real enterprise teams depend on daily — dashboards,
+        data grids, component systems, and accessibility-compliant UIs that work at scale.
+      </p>
+      <p>
+        For the past 3 years I've been part of the team at <strong>C2Perform</strong> — an enterprise SaaS "Super App" 
+        for contact center operations, trusted by companies like <strong>Microsoft, IKEA, Capgemini, and Transcom.</strong>
+        My day-to-day has involved building features across coaching, QA management, knowledge management,
+        real-time analytics dashboards, and the internal UI component library.
+      </p>
+      <p>
+        I take pride in writing UI that is <strong>fast, accessible, and maintainable.</strong>
+        I'm currently deepening my expertise in React advanced patterns, Redux, Jest testing, and DSA —
+        because good developers never stop building.
+      </p>
+    </div>
+    <div class="about-highlights fade-up">
+      <div class="highlight-card">
+        <h4>🏢 Current Company</h4>
+        <p>C2Perform — Enterprise SaaS platform serving Fortune 500 contact centers. Remote, Roswell GA.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>⚡ Core Strength</h4>
+        <p>Building pixel-perfect, accessible, high-performance UIs from Figma designs — at enterprise scale.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>📈 Performance Win</h4>
+        <p>Contributed to improving Lighthouse scores from 58 to 91 using code splitting, lazy loading and memoization.</p>
+      </div>
+      <div class="highlight-card">
+        <h4>🎯 Currently</h4>
+        <p>Building 3 personal projects to deepen React, Redux, Jest & Storybook skills. Open to new opportunities.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work History</div>
+  <h2 class="section-title">Where I've Worked</h2>
+
+  <div class="exp-timeline">
+
+    <!-- C2Perform -->
+    <div class="exp-item fade-up">
+      <div class="exp-left">
+        <div class="exp-dates">Jul 2022 — Present</div>
+        <div class="exp-company-name">C2Perform<br/>Roswell, GA (Remote)</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role-title">UI/UX Developer</div>
+        <div class="exp-company-tag">React.js · Enterprise SaaS</div>
+        <ul class="exp-bullets">
+          <li>Worked on a React.js enterprise SaaS platform serving 10,000+ users across coaching, QA, knowledge management, and real-time communications modules.</li>
+          <li>Built and styled React components using SCSS, contributing to a reusable component library that reduced code duplication by 40% across 15+ product modules.</li>
+          <li>Built a searchable internal UI component showcase — buttons, colors, form elements, layouts — used by QA, developers, and new team members to reduce onboarding friction and knowledge-transfer meetings.</li>
+          <li>Contributed to the Quality Management module, enabling supervisors to manage and track employee performance evaluations within the platform.</li>
+          <li>Built data-heavy dashboards using AG Grid and DataTables, handling 50,000+ row datasets with virtual scrolling and server-side pagination.</li>
+          <li>Contributed to performance improvements via code splitting, lazy loading, and memoization — part of a team effort that raised Lighthouse scores from 58 to 91.</li>
+          <li>Integrated FusionCharts and Google Charts for analytics dashboards used by Fortune 500 clients: Microsoft, IKEA, Capgemini, Transcom, DirectBuy.</li>
+          <li>Applied WCAG 2.1 AA accessibility standards across UI components for enterprise clients in regulated industries.</li>
+          <li>Collaborated with backend teams on REST API integration, contributing to a reduction in integration defects through schema validation and mock data strategies.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Knocial -->
+    <div class="exp-item fade-up">
+      <div class="exp-left">
+        <div class="exp-dates">Aug 2021 — Jun 2022</div>
+        <div class="exp-company-name">Knocial India Limited<br/>Gurgaon, India</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role-title">Frontend Developer</div>
+        <div class="exp-company-tag">HTML · CSS · JavaScript · jQuery</div>
+        <ul class="exp-bullets">
+          <li>Built responsive client websites for Lake Forest Vines, Krivety, Cuzo Games, and Cinif Global using HTML5, CSS3, JavaScript, jQuery, and Bootstrap.</li>
+          <li>Worked on an internal ERP portal for managing HR workflows, vendor management, and company operations.</li>
+          <li>Integrated REST APIs using Axios with loading and error state handling across multiple client projects.</li>
+          <li>Configured and deployed projects via cPanel; managed Git branching workflows across concurrent projects.</li>
+          <li>Self-studied React.js during this period — built practice projects covering fundamentals, hooks, and component patterns in preparation for professional use.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Freelance -->
+    <div class="exp-item fade-up">
+      <div class="exp-left">
+        <div class="exp-dates">2020 — 2021</div>
+        <div class="exp-company-name">Self-Employed<br/>Remote</div>
+      </div>
+      <div class="exp-right">
+        <div class="exp-role-title">Freelance Frontend Developer</div>
+        <div class="exp-company-tag">HTML · CSS · JavaScript · jQuery</div>
+        <ul class="exp-bullets">
+          <li>Designed and built responsive websites for clients using HTML5, CSS3, JavaScript, and jQuery.</li>
+          <li>Gained practical experience in responsive layouts, cross-browser compatibility, and performance best practices.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">Work & Projects</div>
+  <h2 class="section-title">Things I've Built</h2>
+  <div class="projects-grid">
+
+    <div class="project-card fade-up">
+      <div class="project-status status-live">Live Product</div>
+      <div class="project-tag">Enterprise SaaS · C2Perform</div>
+      <div class="project-title">C2Perform Super App</div>
+      <p class="project-desc">
+        Enterprise SaaS "Super App" for contact center operations. Contributed across coaching, QA management,
+        knowledge management, and real-time communications modules for Fortune 500 clients.
+      </p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">SCSS</span>
+        <span class="tech-pill">AG Grid</span>
+        <span class="tech-pill">FusionCharts</span>
+        <span class="tech-pill">REST APIs</span>
+        <span class="tech-pill">WCAG 2.1</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-status status-live">Live Product</div>
+      <div class="project-tag">Internal Tool · C2Perform</div>
+      <div class="project-title">UI Component Showcase</div>
+      <p class="project-desc">
+        Built a searchable internal library of all UI components — buttons, colors, typography, form elements, layouts.
+        Used by QA engineers, developers, and new team members to reduce onboarding friction and unnecessary meetings.
+      </p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">SCSS</span>
+        <span class="tech-pill">Search</span>
+        <span class="tech-pill">Component Docs</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-status status-live">Live Product</div>
+      <div class="project-tag">Module · C2Perform</div>
+      <div class="project-title">Quality Management Module</div>
+      <p class="project-desc">
+        Contributed to the QA module enabling supervisors to create, manage, and track employee performance evaluations,
+        calibration workflows, and automated developmental activity assignments.
+      </p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">DataTables</span>
+        <span class="tech-pill">SCSS</span>
+        <span class="tech-pill">REST APIs</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-status status-progress">In Progress</div>
+      <div class="project-tag">Personal Project</div>
+      <div class="project-title">E-Commerce Web App</div>
+      <p class="project-desc">
+        Full-featured shopping application with product listings, cart management, Redux state management,
+        REST API integration, code splitting, and lazy loading. Deployed on Vercel.
+      </p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">Redux Toolkit</span>
+        <span class="tech-pill">REST API</span>
+        <span class="tech-pill">React Router</span>
+        <span class="tech-pill">Vercel</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-status status-progress">In Progress</div>
+      <div class="project-tag">Personal Project</div>
+      <div class="project-title">Analytics Dashboard</div>
+      <p class="project-desc">
+        Data-heavy dashboard with AG Grid for large dataset handling, real-time chart visualization using Chart.js,
+        and performance optimization techniques. Deployed on Vercel.
+      </p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">AG Grid</span>
+        <span class="tech-pill">Chart.js</span>
+        <span class="tech-pill">REST API</span>
+        <span class="tech-pill">Vercel</span>
+      </div>
+    </div>
+
+    <div class="project-card fade-up">
+      <div class="project-status status-progress">In Progress</div>
+      <div class="project-tag">Personal Project</div>
+      <div class="project-title">Task Manager App</div>
+      <p class="project-desc">
+        Full-featured task management application with complete Jest and React Testing Library coverage,
+        Storybook component documentation, and Redux state management. Deployed on Vercel.
+      </p>
+      <div class="project-tech">
+        <span class="tech-pill">React.js</span>
+        <span class="tech-pill">Redux</span>
+        <span class="tech-pill">Jest</span>
+        <span class="tech-pill">Storybook</span>
+        <span class="tech-pill">Vercel</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">Technical Skills</div>
+  <h2 class="section-title">What I Work With</h2>
+  <div class="skills-layout">
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">Frontend Core</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React.js</span>
+        <span class="skill-tag">JavaScript ES6+</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+        <span class="skill-tag">SCSS/SASS</span>
+        <span class="skill-tag">jQuery</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">React Ecosystem</div>
+      <div class="skill-tags">
+        <span class="skill-tag">React Hooks</span>
+        <span class="skill-tag">Redux Toolkit</span>
+        <span class="skill-tag">Context API</span>
+        <span class="skill-tag">React Router</span>
+        <span class="skill-tag">React Query</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">Performance</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Code Splitting</span>
+        <span class="skill-tag">Lazy Loading</span>
+        <span class="skill-tag">React.memo</span>
+        <span class="skill-tag">useMemo</span>
+        <span class="skill-tag">useCallback</span>
+        <span class="skill-tag">Core Web Vitals</span>
+        <span class="skill-tag">Webpack</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">Data & Grids</div>
+      <div class="skill-tags">
+        <span class="skill-tag">AG Grid</span>
+        <span class="skill-tag">DataTables</span>
+        <span class="skill-tag">FusionCharts</span>
+        <span class="skill-tag">Google Charts</span>
+        <span class="skill-tag">Chart.js</span>
+        <span class="skill-tag">Recharts</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">Testing</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Jest</span>
+        <span class="skill-tag">React Testing Library</span>
+        <span class="skill-tag">Storybook</span>
+        <span class="skill-tag">Chrome DevTools</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">UI Frameworks</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Material UI</span>
+        <span class="skill-tag">Bootstrap 5</span>
+        <span class="skill-tag">Tailwind CSS</span>
+        <span class="skill-tag">Ant Design</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">Tools & DevOps</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">Vercel</span>
+        <span class="skill-tag">Figma</span>
+        <span class="skill-tag">JIRA</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">cPanel</span>
+      </div>
+    </div>
+
+    <div class="skill-group fade-up">
+      <div class="skill-group-label">Accessibility</div>
+      <div class="skill-tags">
+        <span class="skill-tag">WCAG 2.1 AA</span>
+        <span class="skill-tag">ARIA Roles</span>
+        <span class="skill-tag">Semantic HTML</span>
+        <span class="skill-tag">Screen Reader Testing</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Work Together</h2>
+    <p class="contact-desc">
+      I'm currently open to new Frontend Engineer / React Developer opportunities in
+      Noida, Gurugram, Bengaluru, Mumbai, or Pune. Remote is welcome too.
+      If you're hiring or know someone who is — I'd love to connect.
+    </p>
+    <div class="contact-links">
+      <a href="mailto:prantaksingh.jss@gmail.com" class="contact-link">
+        <div class="contact-link-icon">✉</div>
+        <span class="contact-link-label">Email</span>
+      </a>
+      <a href="https://linkedin.com/in/prantak" target="_blank" rel="noopener" class="contact-link">
+        <div class="contact-link-icon">in</div>
+        <span class="contact-link-label">LinkedIn</span>
+      </a>
+      <a href="https://github.com/prantak" target="_blank" rel="noopener" class="contact-link">
+        <div class="contact-link-icon">⌥</div>
+        <span class="contact-link-label">GitHub</span>
+      </a>
+    </div>
+    <a href="mailto:prantaksingh.jss@gmail.com" class="btn-primary">Say Hello →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-name">Prantak <span>Singh</span> — Frontend Engineer</div>
+  <div class="footer-note">© 2025 · Built with HTML, CSS & JS · Gurugram, India</div>
+</footer>
+
+<script>
+// Scroll fade-up animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 120) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--gold)' : '';
+  });
+});
+
+// Animate hero stats
+function animateCount(el, target, suffix = '') {
+  let current = 0;
+  const step = target / 40;
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) {
+      el.textContent = target + suffix;
+      clearInterval(timer);
+    } else {
+      el.textContent = Math.floor(current) + suffix;
+    }
+  }, 30);
+}
+
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const stats = document.querySelectorAll('.stat-num');
+    animateCount(stats[0], 4, '+');
+    animateCount(stats[1], 10, 'K+');
+    animateCount(stats[2], 91, '');
+  }, 400);
+});
+</script>
+</body>
+</html>
